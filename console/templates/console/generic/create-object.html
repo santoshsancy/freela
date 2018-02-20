@@ -1,0 +1,34 @@
+{% extends 'console/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="dashboard">
+	{% block form-header %}
+	<h2 class="page-title">
+		{% block form-title %}
+			{% if page_title %}
+				{{page_title}}
+			{% else %}
+				Create {{obj_name|default:'Object'}} 
+			{% endif %}
+		{% endblock form-title %}</h2>
+	{% endblock form-header %}
+	<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+		{% csrf_token %}
+		
+		{% bootstrap_form form %}
+	   
+		{% block extra-content %}{% endblock extra-content %}
+		<div class="button-block padded-box">
+			<button type="submit" class="btn btn-primary">
+    			Submit <span class="right-arrow"></span>
+    		</button>
+    		<div>
+    		{% if cancel_url %}
+        		{% include 'console/generic/cancel-button.html' %}
+    		{% endif %}
+    		</div>
+   		</div>
+	</form>
+</div>
+{% endblock content %}

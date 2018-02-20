@@ -1,0 +1,59 @@
+/* typography.less FILE */
+body {
+  font-family: 'Open Sans', sans-serif;
+  .regular();
+  color: @darkgray;
+  font-size: 100%;
+  @media @mobile {
+    font-size: 90%;
+  }
+}
+
+h1, h2, h3, h4 {
+  margin-top: 0;
+  &.no-margin {
+    margin-bottom: 0;
+  }
+}
+
+p {
+  font-size: 0.9em;
+  line-height: 1.6em;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  &.no-style {
+    color: @darkgray;
+  }
+}
+
+.content-section-heading {
+  font-size: 1.1em;
+  margin: 0.5em 0;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.large{
+  font-size: large;
+}
+
+.larger{
+  font-size: larger;
+}
+
+.small{
+  font-size: small;
+}
+
+.smaller{
+  font-size: smaller;
+}
+
+.darkgray-text{
+  color: @darkgray;
+}

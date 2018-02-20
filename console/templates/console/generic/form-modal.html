@@ -1,0 +1,27 @@
+{% extends 'console/generic/modal.html' %}
+
+{% block modal-class %}image-upload-modal{% endblock modal-class %}
+
+{% block modal-content %}
+<form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    <div class="modal-header">
+        Create {{obj_name}}
+        {% block modal-header %}
+        <button class="btn btn-close" data-action="modal-hide">X</button>
+        {% endblock modal-header %}  
+    </div>    
+    <div class="modal-body">
+        {% block modal-body %}{% endblock modal-body %}
+    </div>
+    <div class="modal-footer">
+        {% block modal-footer %}
+            {% block modal-buttons %}
+            <button type="submit" class="btn btn-primary">
+                Submit
+            </button>
+            <button class="btn" data-action="modal-hide">Cancel</button>
+            {% endblock modal-buttons %}
+        {% endblock modal-footer %}
+    </div>
+</form>
+{% endblock modal-content %}

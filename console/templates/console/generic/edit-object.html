@@ -1,0 +1,35 @@
+{% extends 'console/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="dashboard">
+    {% block form-header %}
+    <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    <h2 class="page-title background-primary"> 
+    {% if page_title %}
+      {{page_title}}
+    {% else %}
+      Edit {{obj_name|default:'Object'}} 
+    {% endif %}
+        {% if can_delete %}
+            {% include 'console/generic/delete-button.html' with floatclass='pull-right' %}
+        {% endif %}
+    </h2>
+    {% endblock form-header %}
+    
+    	{% csrf_token %}
+    
+    	{% bootstrap_form form %}		
+    	<div class="button-block padded-box">
+    	   <div>
+    		<button type="submit" class="btn btn-primary">
+    				Submit
+    		</button>
+    		</div>
+            {% if cancel_url %}
+                {% include 'console/generic/cancel-button.html' %}
+            {% endif %}
+    	</div>
+    </form>
+</div>
+{% endblock content %}

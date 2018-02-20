@@ -1,0 +1,24 @@
+{% extends 'console/generic/tooltip.html' %}
+
+{% block tooltip-class %} selection-tooltip {% endblock tooltip-class %} 
+{% block tooltip-attrs %} data-submit="{{submit_url}}" {% endblock tooltip-attrs%}
+
+{% block tooltip-content %}
+    <div class="tooltip-header">
+        {{selection_title}}
+    </div>
+    <div class="selection-description">
+        {{selection_description|safe}}
+    </div>
+    <div class="selection-list">
+        {% for option in selection_list %}
+        <div class="selection-item">
+            <label>
+                <input type='radio' name='selection' value="{{option.id}}" 
+                {% if current_selection and option.id == current_selection %} checked="checked"{% endif %} />
+                {{option}}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock tooltip-content %}

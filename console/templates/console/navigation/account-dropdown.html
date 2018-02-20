@@ -1,0 +1,16 @@
+<div class="nav nav-item dropdown">
+    <a href="#" class="dropdown-toggle nav-link" id="user-menu" role="button" data-target="#" data-toggle="dropdown">
+        <span class="glyphicon glyphicon-user"></span><span class="username small-screen-hidden">{{user.username}}</span>
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="user-menu">
+        {% if user.is_superuser %}
+        {% url 'user-management' as my_url %}
+        <li class="nav-item">
+            <a href="{{my_url}}">User Accounts</a>
+        </li>
+        {% endif %}
+        <li><a href="{% url 'user-modify-account' %}">Modify Account</a></li>
+        <li><a href="{% url 'console-logout' %}">Log out</a></li>
+    </ul>
+</div>

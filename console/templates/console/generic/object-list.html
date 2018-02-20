@@ -1,0 +1,23 @@
+{% extends 'console/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+{% block list-title %}
+<div class="list-header">{% block list-header %}PolicyMaker{% endblock list-header %}</div>
+<div class="list-toolbar">
+	{% block list-toolbar %}
+	<a href="{% url create_pattern %}" class="btn btn-primary">{% block addtext %}Add Object{% endblock addtext %}</a>
+	{% endblock list-toolbar %}
+</div>
+{% endblock list-title %}
+
+<div class="list-container">
+{% block list-items %}
+	{% for obj in object_list %}
+	<div class="instance-item">
+		<a class="edit-link" href="{% url edit_pattern obj_id=obj.id %}">{{obj}}</a>
+	</div>
+	{% endfor %}
+{% endblock list-items %}
+</div>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'healthyminds/base.html' %}
+{% load bootstrap3 %}
+
+{% block main %}
+{{block.super}}
+<div class="content-block login-page dashboard">
+	<h2 class="page-title background-darkgray">Welcome To Healthy Minds</h2>
+	<p><b>You can log in</b> with your account information below.</p>
+	<form class="form-horizontal " action="{% url 'welcome' %}" method="post" accept-charset="utf-8">
+		{% csrf_token %}
+		{% bootstrap_form login_form %}
+		<div class="button-block">
+			<button type="submit" class="btn btn-primary btn-next">Login <span class="right-arrow"></span></button>
+		</div>
+		{% url "console-dashboard" as default_next %}
+		<input type="hidden" name="next" value="{{ next|default:default_next }}">
+		<p id="help-text">Have you forgotten your password?
+		  <a href="{% url "console-password-reset" %}">Request a new password</a>.
+		</p>
+	</form>
+</div>
+{% endblock main %}

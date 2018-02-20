@@ -1,0 +1,14 @@
+<script type="text/javascript">
+{% url 'pattern-api' as my_url %}
+var urlpatterns;
+$.ajax({url:"{{my_url}}", datatype: 'json', success:function(data){urlpatterns = data;	}, error:function(data){}});
+function get_url(pattern){
+	if(typeof(urlpatterns) == "undefined"){
+		setTimeout(get_url(pattern), 100);
+		return;	
+	}else if(typeof(pattern) == "undefined"){
+		return urlpatterns;
+	}
+	return urlpatterns[pattern];
+}
+</script>

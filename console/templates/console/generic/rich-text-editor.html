@@ -1,0 +1,10 @@
+<script src="//cdn.ckeditor.com/4.5.8/standard/ckeditor.js"></script>
+<script>
+if(!window.CKEDITOR) {
+	document.write("<script src='/static/js/ckeditor/ckeditor.js'><\/script>");
+}
+</script>
+<script>
+    CKEDITOR.replaceClass = 'rich-text'; 
+    CKEDITOR.config.customConfig= '/static/js/custom-ckeditor.js';
+</script>

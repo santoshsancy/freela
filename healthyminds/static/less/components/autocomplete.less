@@ -1,0 +1,76 @@
+/* AUTOCOMPLETE */
+
+//using select 2
+.select2-container {
+    z-index: 2000;
+    width: 100%;
+
+    //make it scrollable
+    & .select2-dropdown{
+        max-height: 5em;
+        overflow-y: scroll;  
+    }
+}
+
+// Tooltip to the right, left arrow
+.tooltip-wrapper{
+    position:relative;
+}
+.tooltip {
+    display: inline-block; 
+    border-bottom: 1px dotted black;
+    position: relative;
+}
+
+.tooltip:hover > .tooltip-text, .tooltip:hover > .tooltip-wrapper {
+    pointer-events: auto;
+    visibility: visible;
+}
+
+.tooltip >.tooltip-wrapper {
+    display: inline-block;
+    position: absolute;
+    z-index: 2000;
+    overflow: visible;
+    padding: 0.3em;
+    margin-top: 0.5em;
+    border-radius: 0.3em;
+    text-align: center;
+    color: white;
+    background: black;
+    pointer-events: none;
+    visibility: hidden;
+    top: -1em;
+    left: 115%;
+}
+
+// Arrow
+.tooltip > .tooltip-text:before, .tooltip > .tooltip-wrapper:before {
+    display: inline;
+    top: 50%;
+    content: "";
+    position: absolute;
+    border: solid;
+    border-color: transparent black transparent transparent;
+    border-width: 0.4em;
+    z-index: 2000;
+    right: 100%;
+    margin-top: -0.4em;
+}
+
+//Invisible area so you can hover over tooltip
+.tooltip > .tooltip-text:after, .tooltip > .tooltip-wrapper:after {
+    top: -20px;
+    content: " ";
+    display: block;
+    height: 20px;
+    position: absolute;
+    width: 5em;
+    left: 20px;
+}
+
+.tooltip-wrapper > .tooltip-text {
+    overflow-y: auto;
+    max-height: 2em;
+    display: block;
+}

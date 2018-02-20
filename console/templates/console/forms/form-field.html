@@ -1,0 +1,5 @@
+{% load bootstrap3 %}
+{% load combine from utilities %}
+
+{% combine "field-" field.name " form-group" assign_as="group_class" %}
+{% bootstrap_field field form_group_class=group_class %}

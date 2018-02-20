@@ -1,0 +1,38 @@
+{% extends 'healthyminds/base.html' %}
+{% load static %}
+
+{% block body-class %}{{block.super}} console{% endblock %}
+
+{% block styles %}
+<script>window.CKEDITOR_BASEPATH = '{% static "ckeditor/ckeditor/" %}';</script>
+{{ block.super }}
+{% endblock styles %}
+
+{% block navbar %}
+    {% include 'console/navigation/console-navbar.html' %}
+{% endblock navbar %}
+
+{% block wrapper-class %} {{block.super}} {% endblock wrapper-class %}
+
+{% block main %}
+    {% block messages %}
+      {% if messages %}
+        <div class='message-block'>
+          {% for message in messages %}
+              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                  <a class="close" data-dismiss="alert" href="#">&times;</a>{{ message|escape }}
+              </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endblock messages %}
+
+    {% block sidepanel %}{% endblock sidepanel %}
+    <div class="{% block content-class %} content-block {% endblock content-class %}">
+        {% block content %}{% endblock content %}
+    </div>
+{% endblock main %}
+
+{% block extrascripts %}
+    {{block.super}}
+{% endblock extrascripts %}

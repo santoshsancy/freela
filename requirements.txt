@@ -1,0 +1,13 @@
+Django<2
+mysqlclient
+django-bootstrap3
+django-extensions
+django_localflavor_us
+gunicorn
+Pillow
+unicodecsv
+django-pipeline
+bleach
+jsmin
+django-ckeditor
+futures<=2.2.0

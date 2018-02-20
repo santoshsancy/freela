@@ -1,0 +1,50 @@
+{% extends 'console/base.html' %}
+
+{% block main %}
+<div class="dashboard admin-dashboard">
+    <h1 class="page-title">Problem Roulette: Admin Console
+      <a href="{% url 'import-question-data' %}" class="btn btn-primary btn-small btn-add pull-right">
+          Import Question Data
+      </a>
+    </h1>
+    <div class="subject-container container">
+        <h2 class="container-header">
+            Subjects
+            <a href="{% url 'create-subject' %} " class="btn btn-primary btn-small btn-add pull-right">Add Subject</a>
+        </h2>
+        <div class="toolbar">
+
+        </div>
+        <div class="container-block">
+            {% for subject in subjects %}
+            <div class="container-item">
+                <h3 class="item-label">
+                    {{subject}}
+                    <a href="{% url 'edit-subject' obj_id=subject.code %}" class="btn pull-right  btn-primary btn-small">edit</a>
+                </h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="course-container container">
+        <h2 class="container-header">
+            Courses
+            <a href="{% url 'create-course' %} " class="btn btn-primary btn-small btn-add pull-right">Add Course</a>
+        </h2>
+        <div class="toolbar">
+
+        </div>
+        <div class="container-block">
+            {% for course in courses %}
+            <div class="container-item">
+                <h3 class="item-label">
+                    {{course}}
+                    <a class="btn btn-primary btn-primary btn-small pull-right" href="{% url 'course-overview' course_code=course.course_code %}">enter</a>
+                    <a class="btn pull-right  btn-primary btn-small" href="{% url 'edit-course' obj_id=course.id %}">edit</a>
+                </h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock main %}

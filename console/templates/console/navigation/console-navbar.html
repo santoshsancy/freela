@@ -1,0 +1,32 @@
+{% load bootstrap3 %}
+{% load utilities %}
+{% load static %}
+
+<nav class="navbar top-navbar max-width-centered" role="navigation">
+    <div class="nav-container left-nav-container">
+    	{% url 'homepage' as my_url %}
+        <a class="nav-item {% sub_active_url request my_url %} logo-nav-item" href="{{my_url}}">
+          HealthyMinds
+        </a>
+        <div class="nav-item">
+            <a class="nav-link" href="{{my_url}}">My Resources</a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="{{my_url}}">My Health Profile</a>
+        </div>
+        {% if user.is_staff %}
+        <div class="nav-item">
+            <a class="nav-link" href="{{my_url}}">Manage Resources</a>
+        </div>
+        {% endif %}
+        {% if user.is_superuser %}
+        {% url 'user-management' as my_url %}
+        <div class="nav-item small-screen-hidden {% sub_active_url request my_url %}">
+            <a class="nav-link" href="{{my_url}}">User Accounts</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="nav-container right-nav-container">
+	   {% include 'console/navigation/account-dropdown.html' %}
+	</div>
+</nav>

@@ -1,0 +1,68 @@
+<script type="text/javascript">
+function autocomplete_setup(){
+	$('.autocomplete[type=text]').not('.ui-autocomplete-input').autocomplete({change:save_form});
+	$('.autocomplete').each(function(){
+		var me = $(this);
+		data_obj = {key:me.attr('name')};
+		$.ajax({url:'{% url "autocomplete" %}', datatype: 'json', data: data_obj,
+			  success : function(data) {
+				 me.autocomplete('option', "source", data);
+			  },error : function(data) {
+				 console.log(data.responseText);
+			  }
+		});
+	});
+}
+function form_insert(){	
+	$('.form-insert').each(function(){
+		var me = $(this);
+		key = me.attr('form-key');
+		$.ajax({url:'{% url "form-insert" %}', datatype:'html', data:{key:key},
+				success : function(data){
+					me.html(data);
+					autocomplete_setup();
+				},error : function(data) {
+				 console.log(data.responseText);
+			  }
+		});
+	});
+}
+function save_form(){
+	var me = $(this).closest('.form-insert');
+	key = me.attr('form-key');
+	form_data = {'key':key};
+	
+	me.find('input').add(me.find('select')).each(function(){
+		form_data[$(this).attr('name')] = $(this).val();	
+	});
+	
+	$.ajax({url:'{% url "form-insert" %}', datatype:'html',
+		 	data:form_data, method : 'post',
+			success : function(data){
+				me.html(data);
+				autocomplete_setup();
+			},error : function(data) {
+			 console.log(data.responseText);
+		  }
+	});
+}
+
+$(document).ready(function(){
+	autocomplete_setup();
+	form_insert();
+	$('.add-more-group').on('click', '.remove-btn', function(){
+		var me = $(this).closest('.form-insert');
+		key = me.attr('form-key');
+		form_data = {'key':key,"DELETE":$(this).closest('.form-item').find('[name*=-id]').val()};
+		$.ajax({url:'{% url "form-insert" %}', datatype:'html',
+			 	data:form_data, method : 'post',
+				success : function(data){
+					me.html(data);
+					autocomplete_setup();
+				},error : function(data) {
+				 console.log(data.responseText);
+			  }
+		});
+	}).on('click', '.add-btn', save_form).on('change', 'input, select', save_form);
+});
+</script>

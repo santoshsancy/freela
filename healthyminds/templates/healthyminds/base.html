@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% load in_debug_mode from access_settings %}
+{% load static %}
+{% load pipeline %}
+
+{% block body-class %}{% in_debug_mode as DEBUG %}{{block.super}}{% if DEBUG and user.is_superuser %} debug {% endif %}{% endblock %}
+
+{% block styles %}
+    {% stylesheet 'healthyminds' %}
+{% endblock styles %}
+
+{% block scripts %}
+    {% include 'fileloader/jquery.html' %}
+    {% javascript 'healthyminds' %}
+    {% include 'console/generic/rich-text-editor.html' %}
+{% endblock scripts %}

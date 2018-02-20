@@ -1,0 +1,21 @@
+{% extends 'console/base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="max-width-centered">
+  <div class="form-header">
+      <h2 class="page-title background-darkgray">Edit Account Information</h2>
+  </div>
+  <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% bootstrap_form form %}
+      <div class="button-block top-line">
+          <button type="submit" class="btn btn-primary">
+              Submit <span class="right-arrow"></span>
+          </button>
+          <a href="{{cancel_url}}" class="btn btn-link">Cancel</a>
+      </div>
+  </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,3 @@
+{% load tailoring2tags %}
+
+{% render_section treq section %}

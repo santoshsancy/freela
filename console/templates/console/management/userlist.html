@@ -1,0 +1,27 @@
+<table class="list-container table table-bordered">
+  {% block list-items %}
+  {% for obj in object_list %}
+  <tr class="account-item">
+      <td class="account-info labels">
+          {% if obj.is_active %}
+          <span class="label label-success">Active</span>
+          {% else %}
+          <span class="label label-danger">Inactive</span>
+          {% endif %}
+          {% if obj.staff_access %}
+          <span class="acount-info roles mobile-hidden">
+          <span class="label label-info">Admin</span>
+          {% endif %}
+          </span>
+      </td>
+      <td class="account-info name mobile-hidden">{{obj.full_name}}</td>
+      <td class="account-info email">{{obj.email}}</td>
+      <td>
+      <a class="edit-link btn btn-primary btn-small pull-right" href="{% url edit_pattern obj_id=obj.id %}">Edit</a>
+      </td>
+  </tr>
+  {% endfor %}
+  {% endblock list-items %}
+</table>
+<div class="page-info" data-page="{{page_number}}">
+  Showing page {{page_number}} of {{max_pages}}</div>

@@ -1,0 +1,27 @@
+<div class="modal {% block modal-class %}{% endblock modal-class %}">
+    {% block modal-content %}
+    <div class="modal-header">
+        {% block modal-header %}
+          {% if form_label %}
+            {{form_label}}
+          {% else %}{% if is_creating %}
+              Create {{obj_name|default:'Object'}}
+           {% else %}
+              Edit {{form.instance}}
+           {% endif %}
+         {% endif %}
+        <button type="button" class="btn btn-close" data-action="modal-hide">X</button>
+        {% endblock modal-header %}  
+    </div>    
+    <div class="modal-body">
+        {% block modal-body %}{% endblock modal-body %}
+    </div>
+    <div class="modal-footer button-block btn-center-horz">
+        {% block modal-footer %}
+            {% block modal-buttons %}
+            <button type="button" class="btn" data-action="modal-hide">Cancel</button>
+            {% endblock modal-buttons %}
+        {% endblock modal-footer %}
+    </div>
+    {% endblock modal-content %}
+</div>

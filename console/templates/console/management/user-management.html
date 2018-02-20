@@ -1,0 +1,96 @@
+{% extends 'console/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard">
+    <h2 class="page-title">Problem Roulette: User Management</h2>
+    <div class="menu-bar">
+      <a href="{% url 'new-participant' %}" class="btn add-btn btn-primary btn-small">
+        Create Participant Account
+      </a>
+      <a href="{% url 'new-staff' %}" class="btn add-btn btn-primary btn-small">
+        Create Staff Account
+      </a>
+    </div>
+    <div class="user-searchbar searchbar">
+        <div class="page-controller">
+          <button class="prev-page btn btn-primary btn-small" data-step="-1"> Prev </button>
+          <input name="page" class="page-number" type="number" 
+          placeholder="page" min="1" max="999999" value="1" />
+         {# <button class="go-page btn btn-primary btn-small"> Go </button>#}
+          <button class="next-page btn btn-primary btn-small" data-step="1"> Next </button>
+        <select class="page-items" name="page-items">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+        </select>
+        </div>
+        <div class="search-controller">
+        <input name="search" class="searchbox" type="text" placeholder="Search" />
+        <select class="filter" name="filter">
+            <option value="all">All</option>
+            <option value="admin">Admin</option>
+        </select>
+        </div>
+    </div>
+    
+    <div class="management-userlist load-content" 
+      data-src="{% url 'management-userlist' %}">
+    </div>
+</div>
+{% endblock content %}
+
+{% block extrascripts %}
+{{block.super}}
+<script type="text/javascript">
+$(document).ready(function(){      
+   $('.searchbox').keyup(fetch_userlist);
+   $('.filter').add('.page-items').change(fetch_userlist);
+   $('.go-page').click(fetch_userlist);
+   $('.page-number').change(fetch_userlist);
+   $('.prev-page').add('.next-page').click(fetch_userlist);
+   fetch_userlist();
+});
+
+var fetching_userlist = false;
+var fetch_timeout;
+function fetch_userlist(){
+  if(fetching_userlist){
+   clearTimeout(fetch_timeout);
+   fetch_timeout = setTimeout(fetching_userlist, 50);
+   return;
+  };
+  var userlist = $('.management-userlist');
+  var searchbar = $('.user-searchbar');
+  userlist.html(get_loading_indicator());
+
+  var url =  userlist.data('src');
+  var pageNum = parseInt(searchbar.find('.page-number').val());
+  var page_adjustment =  $(this).data('step');
+  if(typeof page_adjustment !== "undefined" ){
+    pageNum += parseInt(page_adjustment);
+  }
+  if(pageNum <= 0){
+    pageNum = 1;
+  }
+  
+  var data = {search:searchbar.find('.searchbox').val(), 
+             filter:searchbar.find('.filter').val(),
+             page:pageNum,
+             pageitems:searchbar.find('.page-items').val()};
+  
+  fetching_userlist = true;
+  $.ajax({
+    url:url, data:data, 
+    success:function(data){
+        userlist.html(data);
+        searchbar.find('.page-number').val($('.page-info').data('page'))
+        fetching_userlist = false;},
+    error:function(data){
+        console.log(data);
+        fetching_userlist = false;},
+  });
+}
+</script>
+{% endblock extrascripts %}

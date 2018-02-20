@@ -1,0 +1,220 @@
+/* structure.less FILE */
+// Breakpoints
+@highdensity: ~"only screen and (-webkit-min-device-pixel-ratio: 1.5)",
+              ~"only screen and (min--moz-device-pixel-ratio: 1.5)",
+              ~"only screen and (-o-min-device-pixel-ratio: 3/2)",
+              ~"only screen and (min-device-pixel-ratio: 1.5)";
+@mobile:      ~"only screen and (max-width: 529px)";
+@tablet-portrait: ~"only screen and (min-width: 530px) and (max-width: 768px)";
+@tablet-landscape: ~"only screen and (min-width: 769px) and (max-width: 949px)";
+@tablet:      ~"only screen and (min-width: 530px) and (max-width: 949px)";
+@desktop:     ~"only screen and (min-width: 950px) and (max-width: 1128px)";
+@desktop-xl:  ~"only screen and (min-width: 1129px)";
+
+body.debug {
+  //This adds a label in the bottom-left corner that displays the current media query state.
+  &:after {
+    background: red;
+    color: #fff;
+    content: "undefined";
+    left: 0;
+    .opacity(80);
+    padding: .5em 1em;
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    z-index: 99;
+    @media @mobile {
+      background: orange;
+      content: "mobile";
+    }
+    @media @tablet {
+      background: purple;
+      content: "tablet";
+    }
+    @media @tablet-portrait {
+      background:red;
+      content: "portrait";
+    }
+    @media @desktop {
+      background: green;
+      content: "desktop";
+    }
+    @media @desktop-xl {
+      background: blue;
+      content: "desktop-xl";
+    }
+  }
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html, body{
+  padding:0;
+  margin:0;
+  height:100%;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  height:100%;
+}
+
+.wrapper{
+  height:auto;
+}
+
+.centered-text{
+  text-align: center;
+}
+
+.pull-right {
+  float: right;
+}
+.pull-left {
+  float: left;
+}
+
+.inline-item {
+  display: inline-block;
+  margin-right: 0.25em;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+ul{
+  padding: 0 0 0 1.5em;
+}
+
+.column-container{
+  .flex-display;
+  .flex-wrap(wrap);
+  @media @mobile, @tablet-portrait{
+    display: block;
+  }
+  &.nowrap{
+    .flex-wrap(nowrap);
+  }
+  &.flex-center{
+    .mixin-justify-content(center);
+  }
+  &.justify-space-around{
+    .mixin-justify-content(space-around);
+  }
+  &.justify-space-between{
+    .mixin-justify-content(space-between);
+  }
+  &.align-center{
+    .mixin-align-items(center);
+  }
+}
+
+.modal{
+  .center();
+  position: fixed;
+  top: 10vh;
+  background: @white;
+  max-width: 80vw;
+  z-index: 1060;
+  border-radius: 0.5em;
+  @media @mobile{
+    max-width: 95vw;
+  }
+  .modal-header{
+    position: relative;
+    padding: 1em 2em 1em 1em;
+    max-height: 5em;
+    overflow: hidden;
+    border-bottom: 0.05em solid @lightgray;
+    .flex-display;
+    .mixin-align-items(center);
+    .close-modal {
+      margin-left: auto;
+      border: none;
+      background-color: transparent;
+      font-size: 1em;
+    }
+  }
+  .glyphicon-remove:hover{
+    cursor: pointer;
+  }
+  .modal-body{
+    padding: 1em;
+    height:auto;
+    height: 50vh;
+    overflow: auto;
+    box-shadow: none;
+  }
+  .modal-footer{
+    padding: 1em;
+    border-top: 0.05em solid @lightgray;
+    min-height: 5em;
+    overflow: hidden;
+    button {
+        min-width: 100px;
+    }
+  }
+}
+
+.feedback-modal{
+  width: 700px;
+  .modal-div{
+    padding: 10px 0px;
+  }
+  textarea{
+    width: 100%;
+  }
+}
+
+.backdrop{
+  position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    background: black;
+    opacity: 0.6;
+}
+
+.no-border{
+  border: none !important;
+}
+
+.attach-footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: auto;
+}
+
+.sidepanel-container{
+  position: relative;
+  margin: 0 auto;
+  padding-bottom: 1em;
+}
+
+.whole-width-container{
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  min-width:100%;
+}
+
+.vertical-flex{
+  .flex-display;
+  .flex-direction(column);
+}
+
+.navbar-wrapper{
+  .bgc(@prime);
+  border-bottom:1px solid @ghostwhite;
+ }
